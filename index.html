@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Silicon Comparison | M系列芯片性能对比</title>
+    <meta name="description" content="Interactive comparison of all Apple M-series chips from M1 to M5. Compare CPU, GPU, Neural Engine, memory bandwidth, Geekbench, Cinebench, Metal scores and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <h1 data-en="Apple Silicon Comparison" data-cn="M系列芯片性能对比">Apple Silicon Comparison</h1>
+            </div>
+            <div class="header-controls">
+                <button id="langToggle" class="lang-btn" aria-label="Toggle language">
+                    <span class="lang-label">中文</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="tab-nav">
+        <div class="tab-nav-inner">
+            <button class="tab-btn active" data-tab="table" data-en="📊 Specs Table" data-cn="📊 规格表">📊 Specs Table</button>
+            <button class="tab-btn" data-tab="tierlist" data-en="🏆 Tier Chart" data-cn="🏆 天梯图">🏆 Tier Chart</button>
+            <button class="tab-btn" data-tab="charts" data-en="📈 Visual Charts" data-cn="📈 可视化图表">📈 Visual Charts</button>
+            <button class="tab-btn" data-tab="guide" data-en="💡 Buying Guide" data-cn="💡 选购指南">💡 Buying Guide</button>
+            <button class="tab-btn" data-tab="versus" data-en="⚡ VS Compare" data-cn="⚡ 代际对比">⚡ VS Compare</button>
+            <button class="tab-btn" data-tab="realworld" data-en="🧪 Real Tasks" data-cn="🧪 实际任务">🧪 Real Tasks</button>
+            <button class="tab-btn" data-tab="power" data-en="🔋 Power & Battery" data-cn="🔋 功耗续航">🔋 Power & Battery</button>
+            <button class="tab-btn" data-tab="devices" data-en="📱 Devices" data-cn="📱 设备关联">📱 Devices</button>
+            <button class="tab-btn" data-tab="thermal" data-en="🌡️ Thermal" data-cn="🌡️ 散热降频">🌡️ Thermal</button>
+            <button class="tab-btn" data-tab="priceperf" data-en="💰 Price/Perf" data-cn="💰 性价比">💰 Price/Perf</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2 class="hero-title" data-en="Every M-Series Chip, Compared" data-cn="全系列 M 芯片，一目了然">Every M-Series Chip, Compared</h2>
+            <p class="hero-subtitle" data-en="From M1 to M5 — verified benchmark data from Geekbench, Cinebench & Apple" data-cn="从 M1 到 M5 — 数据源自 Geekbench、Cinebench 及 Apple 官方">From M1 to M5 — verified benchmark data from Geekbench, Cinebench & Apple</p>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters-section">
+            <div class="filter-group">
+                <label data-en="Generation" data-cn="代际">Generation</label>
+                <div class="filter-chips" id="genFilters">
+                    <button class="filter-chip active" data-filter="all" data-en="All" data-cn="全部">All</button>
+                    <button class="filter-chip" data-filter="M1">M1</button>
+                    <button class="filter-chip" data-filter="M2">M2</button>
+                    <button class="filter-chip" data-filter="M3">M3</button>
+                    <button class="filter-chip" data-filter="M4">M4</button>
+                    <button class="filter-chip" data-filter="M5">M5</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label data-en="Tier" data-cn="级别">Tier</label>
+                <div class="filter-chips" id="tierFilters">
+                    <button class="filter-chip active" data-filter="all" data-en="All" data-cn="全部">All</button>
+                    <button class="filter-chip" data-filter="Base" data-en="Base" data-cn="基础">Base</button>
+                    <button class="filter-chip" data-filter="Pro">Pro</button>
+                    <button class="filter-chip" data-filter="Max">Max</button>
+                    <button class="filter-chip" data-filter="Ultra">Ultra</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Table Section -->
+        <section class="table-section tab-content active" id="tab-table">
+            <div class="table-container">
+                <table id="chipTable">
+                    <thead>
+                        <tr id="tableHeader"></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Tab: Tier Chart -->
+        <section class="tierlist-section tab-content" id="tab-tierlist">
+            <div class="tierlist-controls">
+                <label data-en="Rank by:" data-cn="排序依据：">Rank by:</label>
+                <select id="tierMetric" class="tier-select">
+                    <option value="gb6Multi" data-en="Geekbench 6 Multi-Core" data-cn="Geekbench 6 多核">Geekbench 6 Multi-Core</option>
+                    <option value="gb6Single" data-en="Geekbench 6 Single-Core" data-cn="Geekbench 6 单核">Geekbench 6 Single-Core</option>
+                    <option value="gb6Metal" data-en="GPU Metal Score" data-cn="GPU Metal 分数">GPU Metal Score</option>
+                    <option value="cb23Multi" data-en="Cinebench R23 Multi" data-cn="Cinebench R23 多核">Cinebench R23 Multi</option>
+                    <option value="gpuTFLOPS" data-en="GPU TFLOPS" data-cn="GPU 浮点算力">GPU TFLOPS</option>
+                    <option value="memBandwidth" data-en="Memory Bandwidth" data-cn="内存带宽">Memory Bandwidth</option>
+                    <option value="cpuCores" data-en="CPU Total Cores" data-cn="CPU 核心数">CPU Total Cores</option>
+                    <option value="gpuCores" data-en="GPU Cores" data-cn="GPU 核心数">GPU Cores</option>
+                </select>
+            </div>
+            <div id="tierListContainer" class="tierlist-container"></div>
+        </section>
+
+        <!-- Tab: Charts Section -->
+        <section class="charts-section tab-content" id="tab-charts">
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h4 data-en="Geekbench 6 Multi-Core" data-cn="Geekbench 6 多核">Geekbench 6 Multi-Core</h4>
+                    <canvas id="geekbenchChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4 data-en="GPU Metal Score" data-cn="GPU Metal 分数">GPU Metal Score</h4>
+                    <canvas id="metalChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4 data-en="Cinebench R23 Multi-Core" data-cn="Cinebench R23 多核">Cinebench R23 Multi-Core</h4>
+                    <canvas id="cinebenchChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4 data-en="GPU TFLOPS" data-cn="GPU 浮点算力 (TFLOPS)">GPU TFLOPS</h4>
+                    <canvas id="tflopsChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4 data-en="Memory Bandwidth (GB/s)" data-cn="内存带宽 (GB/s)">Memory Bandwidth (GB/s)</h4>
+                    <canvas id="memBwChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h4 data-en="Neural Engine (TOPS)" data-cn="神经引擎 (TOPS)">Neural Engine (TOPS)</h4>
+                    <canvas id="neuralChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Buying Guide -->
+        <section class="guide-section tab-content" id="tab-guide">
+            <div class="guide-intro">
+                <h3 data-en="Find Your Perfect Chip" data-cn="找到最适合你的芯片">Find Your Perfect Chip</h3>
+                <p data-en="Click a usage scenario to see which chips are recommended and why." data-cn="点击使用场景，查看推荐芯片及理由。">Click a usage scenario to see which chips are recommended and why.</p>
+            </div>
+            <div class="guide-grid" id="guideGrid"></div>
+            <div class="guide-detail" id="guideDetail"></div>
+            <div class="guide-glossary">
+                <h4 data-en="📖 What does each metric mean?" data-cn="📖 每个指标代表什么？">📖 What does each metric mean?</h4>
+                <div class="glossary-grid" id="glossaryGrid"></div>
+            </div>
+        </section>
+
+        <!-- Tab: VS Compare -->
+        <section class="vs-section tab-content" id="tab-versus">
+            <div class="vs-controls">
+                <div class="vs-select-group">
+                    <label data-en="Chip A" data-cn="芯片 A">Chip A</label>
+                    <select id="vsChipA" class="tier-select"></select>
+                </div>
+                <span class="vs-badge">VS</span>
+                <div class="vs-select-group">
+                    <label data-en="Chip B" data-cn="芯片 B">Chip B</label>
+                    <select id="vsChipB" class="tier-select"></select>
+                </div>
+            </div>
+            <div class="vs-chart-container">
+                <canvas id="radarChart"></canvas>
+            </div>
+            <div id="vsDetailTable"></div>
+        </section>
+
+        <!-- Tab: Real World Tasks -->
+        <section class="realworld-section tab-content" id="tab-realworld">
+            <div id="realworldContent"></div>
+        </section>
+
+        <!-- Tab: Power & Battery -->
+        <section class="power-section tab-content" id="tab-power">
+            <div id="powerContent"></div>
+        </section>
+
+        <!-- Tab: Devices -->
+        <section class="devices-section tab-content" id="tab-devices">
+            <div id="devicesContent"></div>
+        </section>
+
+        <!-- Tab: Thermal -->
+        <section class="thermal-section tab-content" id="tab-thermal">
+            <div id="thermalContent"></div>
+        </section>
+
+        <!-- Tab: Price Performance -->
+        <section class="priceperf-section tab-content" id="tab-priceperf">
+            <div id="priceperfContent"></div>
+        </section>
+
+        <!-- Data Sources -->
+        <section class="info-section">
+            <div class="info-card">
+                <h5 data-en="📌 Data Sources" data-cn="📌 数据来源">📌 Data Sources</h5>
+                <p data-en="Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench Browser (GB6 averages), Cinebench R23. GPU benchmarks: Geekbench Metal, Apple/NotebookCheck TFLOPS data. Only officially released chips are included — M4 Ultra & M5 Ultra excluded."
+                   data-cn="硬件规格：Apple 官方页面、Wikipedia。CPU 基准：Geekbench Browser（GB6 均值）、Cinebench R23。GPU 基准：Geekbench Metal、Apple/NotebookCheck TFLOPS 数据。仅包含已正式发布的芯片 — M4 Ultra 和 M5 Ultra 未列入。">
+                    Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench Browser (GB6 averages), Cinebench R23. GPU benchmarks: Geekbench Metal, Apple/NotebookCheck TFLOPS data. Only officially released chips are included — M4 Ultra & M5 Ultra excluded.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p data-en="Apple Silicon Performance Comparison • Data updated March 2026" data-cn="Apple Silicon 性能对比 • 数据更新至 2026年3月">Apple Silicon Performance Comparison • Data updated March 2026</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="app-extra.js"></script>
+</body>
+</html>

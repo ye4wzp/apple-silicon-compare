@@ -1,0 +1,27 @@
+{
+  "updated": "2026-03-17 23:30",
+  "currency": "CNY",
+  "note_en": "Placeholder data — real prices will be populated by extract_prices.py from ai-goofish-monitor",
+  "note_cn": "占位数据 — 真实价格将由 extract_prices.py 从闲鱼监控数据填充",
+  "data_window_days": 30,
+  "chips": {
+    "M1":       { "median_cny": 2800,  "sample_count": 0, "source": "placeholder", "typical_config": "8GB/256GB" },
+    "M1 Pro":   { "median_cny": 5500,  "sample_count": 0, "source": "placeholder", "typical_config": "16GB/512GB" },
+    "M1 Max":   { "median_cny": 7800,  "sample_count": 0, "source": "placeholder", "typical_config": "32GB/1TB" },
+    "M1 Ultra": { "median_cny": 15000, "sample_count": 0, "source": "placeholder", "typical_config": "64GB/1TB" },
+    "M2":       { "median_cny": 4200,  "sample_count": 0, "source": "placeholder", "typical_config": "8GB/256GB" },
+    "M2 Pro":   { "median_cny": 7200,  "sample_count": 0, "source": "placeholder", "typical_config": "16GB/512GB" },
+    "M2 Max":   { "median_cny": 9800,  "sample_count": 0, "source": "placeholder", "typical_config": "32GB/1TB" },
+    "M2 Ultra": { "median_cny": 18000, "sample_count": 0, "source": "placeholder", "typical_config": "64GB/1TB" },
+    "M3":       { "median_cny": 5800,  "sample_count": 0, "source": "placeholder", "typical_config": "8GB/256GB" },
+    "M3 Pro":   { "median_cny": 9500,  "sample_count": 0, "source": "placeholder", "typical_config": "18GB/512GB" },
+    "M3 Max":   { "median_cny": 14500, "sample_count": 0, "source": "placeholder", "typical_config": "36GB/1TB" },
+    "M3 Ultra": { "median_cny": 25000, "sample_count": 0, "source": "placeholder", "typical_config": "64GB/1TB" },
+    "M4":       { "median_cny": 7500,  "sample_count": 0, "source": "placeholder", "typical_config": "16GB/256GB" },
+    "M4 Pro":   { "median_cny": 12000, "sample_count": 0, "source": "placeholder", "typical_config": "24GB/512GB" },
+    "M4 Max":   { "median_cny": 18000, "sample_count": 0, "source": "placeholder", "typical_config": "36GB/1TB" },
+    "M5":       { "median_cny": 10500, "sample_count": 0, "source": "placeholder", "typical_config": "16GB/256GB" },
+    "M5 Pro":   { "median_cny": 16000, "sample_count": 0, "source": "placeholder", "typical_config": "24GB/512GB" },
+    "M5 Max":   { "median_cny": 25000, "sample_count": 0, "source": "placeholder", "typical_config": "36GB/1TB" }
+  }
+}
