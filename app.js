@@ -185,7 +185,7 @@ const chipData = [
     // === M5 Family ===
     {
         name: "M5", gen: "M5", tier: "Base", year: 2025,
-        cpuCores: 10, cpuP: 4, cpuE: 6, cpuConfig: "4S + 6E",
+        cpuCores: 10, cpuP: 4, cpuE: 6, cpuConfig: "4P + 6E",
         gpuCores: 10, gpuTFLOPS: 6.6,
         neuralTOPS: null, memBandwidth: 153, maxMemory: 32,
         processNm: 3, transistorsB: null,
@@ -196,7 +196,7 @@ const chipData = [
     },
     {
         name: "M5 Pro", gen: "M5", tier: "Pro", year: 2026,
-        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6S + 12P",
+        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6P + 12E",
         gpuCores: 20, gpuTFLOPS: null,
         neuralTOPS: null, memBandwidth: 307, maxMemory: 64,
         processNm: 3, transistorsB: null,
@@ -207,7 +207,7 @@ const chipData = [
     },
     {
         name: "M5 Max", gen: "M5", tier: "Max", year: 2026,
-        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6S + 12P",
+        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6P + 12E",
         gpuCores: 40, gpuTFLOPS: null,
         neuralTOPS: null, memBandwidth: 614, maxMemory: 128,
         processNm: 3, transistorsB: null,
@@ -361,7 +361,7 @@ function renderTable() {
                 if (val != null) td.textContent = val % 1 === 0 ? val.toLocaleString() : val.toFixed(1);
                 else { td.textContent = "—"; td.style.color = "var(--text-muted)"; }
             } else if (col.type === "number") {
-                if (val != null) td.textContent = val.toLocaleString();
+                if (val != null) td.textContent = col.key === "year" ? val : val.toLocaleString();
                 else { td.textContent = "—"; td.style.color = "var(--text-muted)"; }
             } else {
                 td.textContent = val ?? "—";
@@ -522,6 +522,12 @@ function refresh() {
     renderTable();
     renderTierList();
     renderCharts();
+    // Also refresh extra tabs
+    if (typeof renderPower === "function") renderPower();
+    if (typeof renderDevices === "function") renderDevices();
+    if (typeof renderRealWorld === "function") renderRealWorld();
+    if (typeof renderThermal === "function") renderThermal();
+    if (typeof renderPricePerf === "function") renderPricePerf();
 }
 
 // ---- SORT ----
@@ -559,6 +565,13 @@ function setupLangToggle() {
         renderTierList();
         renderGuide();
         renderGlossary();
+        // Refresh extra tabs when language changes
+        if (typeof renderPower === "function") renderPower();
+        if (typeof renderDevices === "function") renderDevices();
+        if (typeof renderRealWorld === "function") renderRealWorld();
+        if (typeof renderThermal === "function") renderThermal();
+        if (typeof renderPricePerf === "function") renderPricePerf();
+        if (typeof initVS === "function") initVS();
     });
 }
 

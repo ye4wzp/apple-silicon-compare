@@ -270,7 +270,7 @@ const realWorldTasks = [
             "M2": 350, "M2 Pro": 175, "M2 Max": 95, "M2 Ultra": 50,
             "M3": 240, "M3 Pro": 130, "M3 Max": 55, "M3 Ultra": 28,
             "M4": 180, "M4 Pro": 85, "M4 Max": 42,
-            "M5": 105, "M5 Pro": 40, "M5 Max": 4
+            "M5": 105, "M5 Pro": 40, "M5 Max": 28
         }
     },
     {
