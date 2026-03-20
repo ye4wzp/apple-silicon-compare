@@ -298,6 +298,18 @@ function setupTabs() {
             document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
             btn.classList.add("active");
             document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+
+            // Hide hero + M-series filters when A-series tab is active
+            const hero = document.querySelector(".hero");
+            const filters = document.querySelector(".filters-section");
+            if (btn.dataset.tab === "aseries") {
+                if (hero) hero.style.display = "none";
+                if (filters) filters.style.display = "none";
+            } else {
+                if (hero) hero.style.display = "";
+                if (filters) filters.style.display = "";
+            }
+
             // Re-render charts when switching to charts tab (fixes canvas sizing)
             if (btn.dataset.tab === "charts") {
                 setTimeout(() => renderCharts(), 50);
@@ -572,6 +584,7 @@ function setupLangToggle() {
         if (typeof renderThermal === "function") renderThermal();
         if (typeof renderPricePerf === "function") renderPricePerf();
         if (typeof initVS === "function") initVS();
+        if (typeof renderASeries === "function") renderASeries();
     });
 }
 

@@ -43,6 +43,7 @@
             <button class="tab-btn" data-tab="devices" data-en="📱 Devices" data-cn="📱 设备关联">📱 Devices</button>
             <button class="tab-btn" data-tab="thermal" data-en="🌡️ Thermal" data-cn="🌡️ 散热降频">🌡️ Thermal</button>
             <button class="tab-btn" data-tab="priceperf" data-en="💰 Price/Perf" data-cn="💰 性价比">💰 Price/Perf</button>
+            <button class="tab-btn" data-tab="aseries" data-en="📱 A-Series" data-cn="📱 A系列">📱 A-Series</button>
         </div>
     </nav>
 
@@ -194,6 +195,35 @@
         <!-- Tab: Price Performance -->
         <section class="priceperf-section tab-content" id="tab-priceperf">
             <div id="priceperfContent"></div>
+        </section>
+
+        <!-- Tab: A-Series -->
+        <section class="aseries-section tab-content" id="tab-aseries">
+            <div class="aseries-intro">
+                <h3 data-en="iPhone & iPad A-Series Chips" data-cn="iPhone & iPad A 系列芯片">iPhone & iPad A-Series Chips</h3>
+                <p data-en="From A12 to A18 Pro — performance benchmarks for mobile devices" data-cn="从 A12 到 A18 Pro — 移动设备性能基准测试">From A12 to A18 Pro — performance benchmarks for mobile devices</p>
+            </div>
+            <div class="aseries-filters">
+                <div class="filter-group">
+                    <label data-en="Series" data-cn="系列">Series</label>
+                    <div class="filter-chips" id="aseriesFilters">
+                        <button class="filter-chip active" data-filter="all" data-en="All" data-cn="全部">All</button>
+                        <button class="filter-chip" data-filter="A12">A12</button>
+                        <button class="filter-chip" data-filter="A13">A13</button>
+                        <button class="filter-chip" data-filter="A14">A14</button>
+                        <button class="filter-chip" data-filter="A15">A15</button>
+                        <button class="filter-chip" data-filter="A16">A16</button>
+                        <button class="filter-chip" data-filter="A17">A17</button>
+                        <button class="filter-chip" data-filter="A18">A18</button>
+                    </div>
+                </div>
+            </div>
+            <div class="aseries-view-toggle">
+                <button class="view-btn active" data-view="table" data-en="📊 Table" data-cn="📊 表格">📊 Table</button>
+                <button class="view-btn" data-view="tier" data-en="🏆 Tier Chart" data-cn="🏆 天梯图">🏆 Tier Chart</button>
+                <button class="view-btn" data-view="antutu" data-en="🐰 AnTuTu" data-cn="🐰 安兔兔">🐰 AnTuTu</button>
+            </div>
+            <div id="aseriesContent"></div>
         </section>
 
         <!-- Data Sources -->

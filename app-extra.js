@@ -669,9 +669,305 @@ function initExtraFeatures() {
     renderRealWorld();
     renderThermal();
     loadPrices().then(() => renderPricePerf());
+    initASeries();
 }
 
 // Hook into main init
 document.addEventListener("DOMContentLoaded", () => {
     setTimeout(initExtraFeatures, 100);
 });
+
+// ============================================================
+// A-SERIES CHIP DATA
+// ============================================================
+const aSeriesData = [
+    {
+        name: "A12 Bionic", gen: "A12", variant: "standard", year: 2018,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 4, gpuName: "Apple GPU (4-core)",
+        neuralTOPS: 5, processNm: 7, transistorsB: 6.9,
+        gb6Single: 1115, gb6Multi: 2825,
+        antutu: 363525,
+        devices_en: "iPhone XS/XS Max/XR, iPad Air 3, iPad mini 5, iPad 8",
+        devices_cn: "iPhone XS/XS Max/XR, iPad Air 3, iPad mini 5, iPad 8"
+    },
+    {
+        name: "A13 Bionic", gen: "A13", variant: "standard", year: 2019,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 4, gpuName: "Apple GPU (4-core)",
+        neuralTOPS: 6, processNm: 7, transistorsB: 8.5,
+        gb6Single: 1335, gb6Multi: 3309,
+        antutu: 536874,
+        devices_en: "iPhone 11/11 Pro/11 Pro Max, iPad 9, iPhone SE 2",
+        devices_cn: "iPhone 11/11 Pro/11 Pro Max, iPad 9, iPhone SE 2"
+    },
+    {
+        name: "A14 Bionic", gen: "A14", variant: "standard", year: 2020,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 4, gpuName: "Apple GPU (4-core)",
+        neuralTOPS: 11, processNm: 5, transistorsB: 11.8,
+        gb6Single: 1590, gb6Multi: 4138,
+        antutu: 637524,
+        devices_en: "iPhone 12 series, iPad Air 4, iPad 10",
+        devices_cn: "iPhone 12 系列, iPad Air 4, iPad 10"
+    },
+    {
+        name: "A15 Bionic", gen: "A15", variant: "standard", year: 2021,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 5, gpuName: "Apple GPU (5-core)",
+        neuralTOPS: 15.8, processNm: 5, transistorsB: 15,
+        gb6Single: 1735, gb6Multi: 4706,
+        antutu: 812345,
+        devices_en: "iPhone 13/13 mini/14/14 Plus, iPad mini 6, iPhone SE 3",
+        devices_cn: "iPhone 13/13 mini/14/14 Plus, iPad mini 6, iPhone SE 3"
+    },
+    {
+        name: "A15 Bionic (Pro)", gen: "A15", variant: "pro", year: 2021,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 5, gpuName: "Apple GPU (5-core)",
+        neuralTOPS: 15.8, processNm: 5, transistorsB: 15,
+        gb6Single: 1735, gb6Multi: 4706,
+        antutu: 838790,
+        devices_en: "iPhone 13 Pro/Pro Max",
+        devices_cn: "iPhone 13 Pro/Pro Max"
+    },
+    {
+        name: "A16 Bionic", gen: "A16", variant: "standard", year: 2022,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 5, gpuName: "Apple GPU (5-core)",
+        neuralTOPS: 17, processNm: 4, transistorsB: 16,
+        gb6Single: 2537, gb6Multi: 6399,
+        antutu: 961980,
+        devices_en: "iPhone 14 Pro/Pro Max, iPhone 15/15 Plus",
+        devices_cn: "iPhone 14 Pro/Pro Max, iPhone 15/15 Plus"
+    },
+    {
+        name: "A17 Pro", gen: "A17", variant: "pro", year: 2023,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 6, gpuName: "Apple GPU (6-core)",
+        neuralTOPS: 35, processNm: 3, transistorsB: 19,
+        gb6Single: 2908, gb6Multi: 7264,
+        antutu: 1476753,
+        devices_en: "iPhone 15 Pro/Pro Max",
+        devices_cn: "iPhone 15 Pro/Pro Max"
+    },
+    {
+        name: "A18", gen: "A18", variant: "standard", year: 2024,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 5, gpuName: "Apple GPU (5-core)",
+        neuralTOPS: 35, processNm: 3, transistorsB: null,
+        gb6Single: 3269, gb6Multi: 7773,
+        antutu: 1582396,
+        devices_en: "iPhone 16/16 Plus",
+        devices_cn: "iPhone 16/16 Plus"
+    },
+    {
+        name: "A18 Pro", gen: "A18", variant: "pro", year: 2024,
+        cpuCores: 6, cpuConfig: "2P + 4E", gpuCores: 6, gpuName: "Apple GPU (6-core)",
+        neuralTOPS: 35, processNm: 3, transistorsB: null,
+        gb6Single: 3402, gb6Multi: 8250,
+        antutu: 1647938,
+        devices_en: "iPhone 16 Pro/Pro Max",
+        devices_cn: "iPhone 16 Pro/Pro Max"
+    }
+];
+
+const aSeriesGenColors = {
+    A12: { bg: "rgba(255,159,10,0.7)",  border: "#ff9f0a" },
+    A13: { bg: "rgba(255,107,53,0.7)",  border: "#ff6b35" },
+    A14: { bg: "rgba(48,209,88,0.7)",   border: "#30d158" },
+    A15: { bg: "rgba(100,210,255,0.7)", border: "#64d2ff" },
+    A16: { bg: "rgba(191,90,242,0.7)",  border: "#bf5af2" },
+    A17: { bg: "rgba(255,55,95,0.7)",   border: "#ff375f" },
+    A18: { bg: "rgba(255,214,10,0.7)",  border: "#ffd60a" }
+};
+
+let aSeriesFilter = "all";
+let aSeriesView = "table";
+
+function getFilteredASeries() {
+    if (aSeriesFilter === "all") return aSeriesData;
+    return aSeriesData.filter(c => c.gen === aSeriesFilter);
+}
+
+function initASeries() {
+    // Filter buttons
+    const filterContainer = document.getElementById("aseriesFilters");
+    if (!filterContainer) return;
+    filterContainer.addEventListener("click", e => {
+        const btn = e.target.closest(".filter-chip");
+        if (!btn) return;
+        filterContainer.querySelectorAll(".filter-chip").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        aSeriesFilter = btn.dataset.filter;
+        renderASeries();
+    });
+
+    // View toggle
+    document.querySelectorAll(".aseries-view-toggle .view-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            document.querySelectorAll(".aseries-view-toggle .view-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            aSeriesView = btn.dataset.view;
+            renderASeries();
+        });
+    });
+
+    renderASeries();
+}
+
+function renderASeries() {
+    const container = document.getElementById("aseriesContent");
+    if (!container) return;
+
+    if (aSeriesView === "table") renderASeriesTable(container);
+    else if (aSeriesView === "tier") renderASeriesTier(container);
+    else if (aSeriesView === "antutu") renderASeriesAnTuTu(container);
+}
+
+function renderASeriesTable(container) {
+    const data = getFilteredASeries();
+    const label = currentLang === "en";
+    const cols = [
+        { key: "name",       en: "Chip",        cn: "芯片" },
+        { key: "year",       en: "Year",        cn: "年份" },
+        { key: "processNm",  en: "nm",          cn: "制程" },
+        { key: "cpuCores",   en: "CPU",         cn: "CPU" },
+        { key: "cpuConfig",  en: "Config",      cn: "配置" },
+        { key: "gpuCores",   en: "GPU",         cn: "GPU" },
+        { key: "neuralTOPS", en: "NE TOPS",     cn: "NE TOPS" },
+        { key: "gb6Single",  en: "GB6-S",       cn: "GB6单核" },
+        { key: "gb6Multi",   en: "GB6-M",       cn: "GB6多核" },
+        { key: "antutu",     en: "AnTuTu",      cn: "安兔兔" },
+        { key: "devices",    en: "Devices",     cn: "设备" }
+    ];
+
+    const maxGB6 = Math.max(...aSeriesData.map(c => c.gb6Multi));
+
+    let html = `<div class="table-container"><table class="aseries-table"><thead><tr>`;
+    cols.forEach(c => { html += `<th>${label ? c.en : c.cn}</th>`; });
+    html += `</tr></thead><tbody>`;
+
+    data.forEach(chip => {
+        const genClass = `gen-${chip.gen.toLowerCase()}`;
+        const badgeClass = chip.variant === "pro" ? "badge-pro-variant" : "badge-standard";
+        const badgeText = chip.variant === "pro" ? "Pro" : chip.gen;
+        const devices = label ? chip.devices_en : chip.devices_cn;
+        const gb6Pct = (chip.gb6Multi / maxGB6) * 100;
+
+        html += `<tr class="${genClass}">`;
+        cols.forEach(col => {
+            if (col.key === "name") {
+                html += `<td><div class="chip-name"><span>${chip.name}</span><span class="chip-badge ${badgeClass}">${badgeText}</span></div></td>`;
+            } else if (col.key === "year") {
+                html += `<td>${chip.year}</td>`;
+            } else if (col.key === "devices") {
+                html += `<td style="white-space:normal;max-width:200px;font-size:11px;color:var(--text-muted)">${devices}</td>`;
+            } else if (col.key === "gb6Multi") {
+                html += `<td><div class="bar-cell"><span>${chip.gb6Multi.toLocaleString()}</span><div class="bar-fill" style="width:${Math.max(gb6Pct * 0.5, 2)}px"></div></div></td>`;
+            } else if (col.key === "antutu") {
+                html += `<td style="font-weight:600;color:var(--accent-orange)">${chip.antutu.toLocaleString()}</td>`;
+            } else {
+                const val = chip[col.key];
+                html += `<td>${val != null ? (typeof val === "number" ? val.toLocaleString() : val) : "—"}</td>`;
+            }
+        });
+        html += `</tr>`;
+    });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+}
+
+function renderASeriesTier(container) {
+    const data = getFilteredASeries().slice().sort((a, b) => b.gb6Multi - a.gb6Multi);
+    if (data.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:40px">${currentLang === "en" ? "No data for current filter." : "当前筛选无数据。"}</p>`;
+        return;
+    }
+    const maxVal = data[0].gb6Multi;
+
+    let html = `<div class="tierlist-container">`;
+    data.forEach((chip, i) => {
+        const pct = (chip.gb6Multi / maxVal) * 100;
+        const rankClass = i === 0 ? "tier-rank-1" : i === 1 ? "tier-rank-2" : i === 2 ? "tier-rank-3" : "tier-rank-other";
+        const barClass = `tier-${chip.gen.toLowerCase()}`;
+        html += `
+            <div class="tier-row" style="animation-delay:${i * 0.04}s">
+                <div class="tier-rank ${rankClass}">${i + 1}</div>
+                <div class="tier-bar-wrap">
+                    <div class="tier-bar ${barClass}" style="width:${Math.max(pct, 12)}%">
+                        <span class="tier-chip-name">${chip.name}</span>
+                        <span class="tier-chip-badge">${chip.variant === "pro" ? "Pro" : chip.gen}</span>
+                        <span class="tier-value">${chip.gb6Multi.toLocaleString()}</span>
+                    </div>
+                </div>
+            </div>`;
+    });
+    html += `</div>`;
+    container.innerHTML = html;
+}
+
+function renderASeriesAnTuTu(container) {
+    const data = getFilteredASeries().slice().sort((a, b) => b.antutu - a.antutu);
+    if (data.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted);text-align:center;padding:40px">${currentLang === "en" ? "No data for current filter." : "当前筛选无数据。"}</p>`;
+        return;
+    }
+    const maxVal = data[0].antutu;
+    const label = currentLang === "en";
+
+    let html = `<div class="antutu-chart-card">
+        <h4>🐰 ${label ? "AnTuTu Benchmark Ranking" : "安兔兔跑分排行"}</h4>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">${label ? "Total score (CPU + GPU + Memory + UX)" : "总分（CPU + GPU + 内存 + UX）"}</p>
+        <div class="rw-bars">`;
+
+    data.forEach((chip, i) => {
+        const pct = (chip.antutu / maxVal) * 100;
+        const medal = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `#${i + 1}`;
+        const gen = chip.gen.toLowerCase();
+        html += `
+            <div class="rw-bar-row" style="margin-bottom:6px">
+                <span class="rw-chip-name" style="min-width:110px">
+                    <span style="font-size:10px;margin-right:2px">${medal}</span> ${chip.name}
+                </span>
+                <div class="rw-bar-track">
+                    <div class="rw-bar-fill tier-${gen}" style="width:${Math.max(pct, 5)}%"></div>
+                </div>
+                <span class="rw-time" style="min-width:90px;text-align:right;font-weight:600;color:var(--accent-orange)">
+                    ${chip.antutu.toLocaleString()}
+                </span>
+            </div>`;
+    });
+
+    html += `</div></div>`;
+
+    // Also show a comparison with M-series base chips
+    html += `<div class="antutu-chart-card" style="margin-top:20px">
+        <h4>📊 ${label ? "A-Series vs M-Series (Geekbench 6 Multi-Core)" : "A 系列 vs M 系列（Geekbench 6 多核）"}</h4>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px">${label ? "How do mobile chips stack up against Mac chips?" : "手机芯片和 Mac 芯片性能差距有多大？"}</p>
+        <div class="rw-bars">`;
+
+    // Combine A-series + M-series base chips for comparison
+    const mBaseChips = chipData.filter(c => c.tier === "Base").map(c => ({
+        name: c.name, gen: c.gen.toLowerCase(), gb6Multi: c.gb6Multi, isMSeries: true
+    }));
+    const aChips = data.map(c => ({
+        name: c.name, gen: c.gen.toLowerCase(), gb6Multi: c.gb6Multi, isMSeries: false
+    }));
+    const combined = [...aChips, ...mBaseChips].sort((a, b) => b.gb6Multi - a.gb6Multi);
+    const combinedMax = combined[0]?.gb6Multi || 1;
+
+    combined.forEach((c, i) => {
+        const pct = (c.gb6Multi / combinedMax) * 100;
+        const barClass = c.isMSeries ? `tier-${c.gen}` : `tier-${c.gen}`;
+        const nameStyle = c.isMSeries ? "font-weight:700" : "";
+        const indicator = c.isMSeries ? " 💻" : " 📱";
+        html += `
+            <div class="rw-bar-row" style="margin-bottom:4px">
+                <span class="rw-chip-name" style="min-width:110px;${nameStyle}">
+                    ${c.name}${indicator}
+                </span>
+                <div class="rw-bar-track">
+                    <div class="rw-bar-fill ${barClass}" style="width:${Math.max(pct, 3)}%"></div>
+                </div>
+                <span class="rw-time" style="min-width:70px;text-align:right">
+                    ${c.gb6Multi.toLocaleString()}
+                </span>
+            </div>`;
+    });
+
+    html += `</div></div>`;
+    container.innerHTML = html;
+}
