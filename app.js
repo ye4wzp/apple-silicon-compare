@@ -299,10 +299,11 @@ function setupTabs() {
             btn.classList.add("active");
             document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
 
-            // Hide hero + M-series filters when A-series tab is active
+            // Hide hero + M-series filters for non-M-series tabs
             const hero = document.querySelector(".hero");
             const filters = document.querySelector(".filters-section");
-            if (btn.dataset.tab === "aseries") {
+            const hideHeroTabs = ["aseries","efficiency","timeline","upgrade","crossplatform","aiperformance"];
+            if (hideHeroTabs.includes(btn.dataset.tab)) {
                 if (hero) hero.style.display = "none";
                 if (filters) filters.style.display = "none";
             } else {
@@ -585,6 +586,11 @@ function setupLangToggle() {
         if (typeof renderPricePerf === "function") renderPricePerf();
         if (typeof initVS === "function") initVS();
         if (typeof renderASeries === "function") renderASeries();
+        if (typeof renderEfficiency === "function") renderEfficiency();
+        if (typeof renderTimeline === "function") renderTimeline();
+        if (typeof renderUpgrade === "function") renderUpgrade();
+        if (typeof renderCrossPlatform === "function") renderCrossPlatform();
+        if (typeof renderAIPerformance === "function") renderAIPerformance();
     });
 }
 

@@ -67,6 +67,11 @@
             <button class="tab-btn" data-tab="thermal" data-en="🌡️ Thermal" data-cn="🌡️ 散热降频">🌡️ Thermal</button>
             <button class="tab-btn" data-tab="priceperf" data-en="💰 Price/Perf" data-cn="💰 性价比">💰 Price/Perf</button>
             <button class="tab-btn" data-tab="aseries" data-en="📱 A-Series" data-cn="📱 A系列">📱 A-Series</button>
+            <button class="tab-btn" data-tab="efficiency" data-en="⚡ Efficiency" data-cn="⚡ 能效比">⚡ Efficiency</button>
+            <button class="tab-btn" data-tab="timeline" data-en="📊 Timeline" data-cn="📊 进化史">📊 Timeline</button>
+            <button class="tab-btn" data-tab="upgrade" data-en="🔄 Upgrade" data-cn="🔄 升级计算">🔄 Upgrade</button>
+            <button class="tab-btn" data-tab="crossplatform" data-en="🌍 vs Intel/AMD" data-cn="🌍 跨平台">🌍 vs Intel/AMD</button>
+            <button class="tab-btn" data-tab="aiperformance" data-en="🤖 AI Perf" data-cn="🤖 AI推理">🤖 AI Perf</button>
         </div>
         <button class="tab-scroll-arrow tab-scroll-right" id="tabScrollRight" aria-label="Scroll tabs right">›</button>
         <div class="tab-fade-left"></div>
@@ -252,6 +257,52 @@
             <div id="aseriesContent"></div>
         </section>
 
+        <!-- Tab: Efficiency -->
+        <section class="adv-section tab-content" id="tab-efficiency">
+            <div class="adv-intro"><h3 data-en="⚡ Performance per Watt" data-cn="⚡ 每瓦性能排行">⚡ Performance per Watt</h3>
+            <p data-en="Apple Silicon's biggest advantage — how much performance per watt of power?" data-cn="Apple Silicon 最大优势 — 每瓦功耗能提供多少性能？">Apple Silicon's biggest advantage — how much performance per watt of power?</p></div>
+            <div id="efficiencyContent"></div>
+        </section>
+
+        <!-- Tab: Timeline -->
+        <section class="adv-section tab-content" id="tab-timeline">
+            <div class="adv-intro"><h3 data-en="📊 Silicon Evolution Timeline" data-cn="📊 芯片进化时间线">📊 Silicon Evolution Timeline</h3>
+            <p data-en="How Apple Silicon performance has evolved from 2020 to 2025" data-cn="Apple Silicon 性能从 2020 到 2025 的进化历程">How Apple Silicon performance has evolved from 2020 to 2025</p></div>
+            <div id="timelineContent"></div>
+        </section>
+
+        <!-- Tab: Upgrade Calculator -->
+        <section class="adv-section tab-content" id="tab-upgrade">
+            <div class="adv-intro"><h3 data-en="🔄 Upgrade Calculator" data-cn="🔄 升级计算器">🔄 Upgrade Calculator</h3>
+            <p data-en="How much faster is your target chip vs your current one?" data-cn="目标芯片比你现在的快多少？">How much faster is your target chip vs your current one?</p></div>
+            <div class="upgrade-selectors">
+                <div class="upgrade-col">
+                    <label data-en="Current Chip" data-cn="当前芯片">Current Chip</label>
+                    <select id="upgradeFrom" class="tier-select"></select>
+                </div>
+                <span class="upgrade-arrow">→</span>
+                <div class="upgrade-col">
+                    <label data-en="Target Chip" data-cn="目标芯片">Target Chip</label>
+                    <select id="upgradeTo" class="tier-select"></select>
+                </div>
+            </div>
+            <div id="upgradeResult"></div>
+        </section>
+
+        <!-- Tab: Cross-Platform -->
+        <section class="adv-section tab-content" id="tab-crossplatform">
+            <div class="adv-intro"><h3 data-en="🌍 Apple vs Intel vs AMD" data-cn="🌍 Apple vs Intel vs AMD">🌍 Apple vs Intel vs AMD</h3>
+            <p data-en="How does Apple Silicon compare to the competition?" data-cn="Apple Silicon 和竞品的对比如何？">How does Apple Silicon compare to the competition?</p></div>
+            <div id="crossplatformContent"></div>
+        </section>
+
+        <!-- Tab: AI Performance -->
+        <section class="adv-section tab-content" id="tab-aiperformance">
+            <div class="adv-intro"><h3 data-en="🤖 AI / ML Inference" data-cn="🤖 AI / ML 推理性能">🤖 AI / ML Inference</h3>
+            <p data-en="Local LLM inference speed — tokens/sec with llama.cpp" data-cn="本地大模型推理速度 — llama.cpp tokens/秒">Local LLM inference speed — tokens/sec with llama.cpp</p></div>
+            <div id="aiContent"></div>
+        </section>
+
         <!-- Data Sources -->
         <section class="info-section">
             <div class="info-card">
@@ -271,6 +322,7 @@
     <script src="app.js"></script>
     <script src="app-extra.js"></script>
     <script src="app-ui.js"></script>
+    <script src="app-advanced.js"></script>
     <script>
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
