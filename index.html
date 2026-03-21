@@ -6,11 +6,28 @@
     <title>Apple Silicon Comparison | M系列芯片性能对比</title>
     <meta name="description" content="Interactive comparison of all Apple M-series chips from M1 to M5. Compare CPU, GPU, Neural Engine, memory bandwidth, Geekbench, Cinebench, Metal scores and more.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='50' font-family='system-ui' fill='%232997ff'%3EM%3C/text%3E%3C/svg%3E">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Apple Silicon Comparison",
+      "description": "Interactive comparison of all Apple M-series and A-series chips. Compare CPU, GPU, benchmarks and more.",
+      "url": "https://168.107.27.198/apple-silicon-compare/",
+      "applicationCategory": "ReferenceApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "MoPai" }
+    }
+    </script>
 </head>
 <body>
     <div class="bg-glow bg-glow-1"></div>
@@ -24,6 +41,11 @@
                 <h1 data-en="Apple Silicon Comparison" data-cn="M系列芯片性能对比">Apple Silicon Comparison</h1>
             </div>
             <div class="header-controls">
+                <div class="search-wrapper" id="searchWrapper">
+                    <button class="search-toggle" id="searchToggle" aria-label="Search">🔍</button>
+                    <input type="text" id="chipSearch" class="search-input" placeholder="Search chip..." data-en-placeholder="Search chip..." data-cn-placeholder="搜索芯片..." autocomplete="off">
+                </div>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">☀️</button>
                 <button id="langToggle" class="lang-btn" aria-label="Toggle language">
                     <span class="lang-label">中文</span>
                 </button>
@@ -32,7 +54,8 @@
     </header>
 
     <nav class="tab-nav">
-        <div class="tab-nav-inner">
+        <button class="tab-scroll-arrow tab-scroll-left" id="tabScrollLeft" aria-label="Scroll tabs left">‹</button>
+        <div class="tab-nav-inner" id="tabNavInner">
             <button class="tab-btn active" data-tab="table" data-en="📊 Specs Table" data-cn="📊 规格表">📊 Specs Table</button>
             <button class="tab-btn" data-tab="tierlist" data-en="🏆 Tier Chart" data-cn="🏆 天梯图">🏆 Tier Chart</button>
             <button class="tab-btn" data-tab="charts" data-en="📈 Visual Charts" data-cn="📈 可视化图表">📈 Visual Charts</button>
@@ -45,6 +68,9 @@
             <button class="tab-btn" data-tab="priceperf" data-en="💰 Price/Perf" data-cn="💰 性价比">💰 Price/Perf</button>
             <button class="tab-btn" data-tab="aseries" data-en="📱 A-Series" data-cn="📱 A系列">📱 A-Series</button>
         </div>
+        <button class="tab-scroll-arrow tab-scroll-right" id="tabScrollRight" aria-label="Scroll tabs right">›</button>
+        <div class="tab-fade-left"></div>
+        <div class="tab-fade-right"></div>
     </nav>
 
     <main>
@@ -244,5 +270,12 @@
 
     <script src="app.js"></script>
     <script src="app-extra.js"></script>
+    <script src="app-ui.js"></script>
+    <script>
+    // Service Worker Registration
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+    </script>
 </body>
 </html>
