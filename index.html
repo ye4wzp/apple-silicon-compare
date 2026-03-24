@@ -8,6 +8,18 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='50' font-family='system-ui' fill='%232997ff'%3EM%3C/text%3E%3C/svg%3E">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0a0a0f">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Apple Silicon Comparison — M1 to M5 Benchmark Explorer">
+    <meta property="og:description" content="Interactive comparison of all Apple M-series & A-series chips. Geekbench 6, Cinebench, Metal, AI inference, efficiency ranking, architecture die maps and more.">
+    <meta property="og:image" content="https://ye4wzp.github.io/apple-silicon-compare/og-image.png">
+    <meta property="og:url" content="https://ye4wzp.github.io/apple-silicon-compare/">
+    <meta property="og:site_name" content="Apple Silicon Compare">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apple Silicon Comparison — M1 to M5">
+    <meta name="twitter:description" content="Interactive benchmark comparison for all Apple Silicon chips. 20+ analysis tools.">
+    <meta name="twitter:image" content="https://ye4wzp.github.io/apple-silicon-compare/og-image.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,6 +87,8 @@
             <button class="tab-btn" data-tab="aiperformance" data-en="🤖 AI Perf" data-cn="🤖 AI推理">🤖 AI Perf</button>
             <button class="tab-btn" data-tab="diemap" data-en="🔬 Die Map" data-cn="🔬 架构图">🔬 Die Map</button>
             <button class="tab-btn" data-tab="simulator" data-en="🎯 Simulator" data-cn="🎯 模拟器">🎯 Simulator</button>
+            <button class="tab-btn" data-tab="pick2" data-en="🤝 Pick 2" data-cn="🤝 并排对比">🤝 Pick 2</button>
+            <button class="tab-btn" data-tab="bestfor" data-en="⭐ Best For" data-cn="⭐ 最佳推荐">⭐ Best For</button>
         </div>
         <button class="tab-scroll-arrow tab-scroll-right" id="tabScrollRight" aria-label="Scroll tabs right">›</button>
         <div class="tab-fade-left"></div>
@@ -317,6 +331,25 @@
             <div id="dieMapContent"></div>
         </section>
 
+        <!-- Tab: Pick 2 -->
+        <section class="adv-section tab-content" id="tab-pick2">
+            <div class="adv-intro"><h3 data-en="🤝 Side-by-Side Comparison" data-cn="🤝 并排对比">🤝 Side-by-Side Comparison</h3>
+            <p data-en="Pick any two chips to compare head-to-head" data-cn="选择任意两颗芯片进行头对头对比">Pick any two chips to compare head-to-head</p></div>
+            <div class="pick2-selectors">
+                <select id="pick2Left" class="tier-select"></select>
+                <span class="pick2-vs">VS</span>
+                <select id="pick2Right" class="tier-select"></select>
+            </div>
+            <div id="pick2Content"></div>
+        </section>
+
+        <!-- Tab: Best For -->
+        <section class="adv-section tab-content" id="tab-bestfor">
+            <div class="adv-intro"><h3 data-en="⭐ Best Chip For Your Needs" data-cn="⭐ 根据用途选芯片">⭐ Best Chip For Your Needs</h3>
+            <p data-en="Auto-generated pros & cons with use-case recommendations" data-cn="自动生成优缺点 + 场景推荐">Auto-generated pros &amp; cons with use-case recommendations</p></div>
+            <div id="bestforContent"></div>
+        </section>
+
         <!-- Tab: Simulator -->
         <section class="adv-section tab-content" id="tab-simulator">
             <div class="adv-intro"><h3 data-en="🎯 Performance Simulator" data-cn="🎯 性能模拟器">🎯 Performance Simulator</h3>
@@ -349,6 +382,7 @@
     <script src="app-ui.js"></script>
     <script src="app-advanced.js"></script>
     <script src="app-features.js"></script>
+    <script src="app-compare.js"></script>
     <script>
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
