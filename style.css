@@ -821,6 +821,53 @@ footer p { font-size: 12px; color: var(--text-muted); }
     font-size: 28px; color: var(--accent-blue); font-weight: 300;
 }
 
+/* ====== DIE MAP ====== */
+.diemap-selector {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin-bottom: 24px;
+}
+.diemap-selector label { font-size: 13px; color: var(--text-secondary); }
+.diemap-wrapper {
+    max-width: 600px; margin: 0 auto 20px;
+    background: var(--bg-card); border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md); padding: 24px;
+    backdrop-filter: blur(12px);
+}
+.diemap-svg { width: 100%; height: auto; }
+.diemap-block:hover rect { stroke-width: 1 !important; filter: brightness(1.3); }
+.diemap-info {
+    max-width: 600px; margin: 0 auto;
+}
+.diemap-meta {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    margin-bottom: 16px; font-size: 13px; color: var(--text-secondary);
+}
+.diemap-detail {
+    background: var(--bg-card); border: 1px solid var(--border-glass);
+    border-radius: var(--radius-sm); padding: 12px; min-height: 60px;
+}
+
+/* ====== FOOTER & CHANGELOG ====== */
+.footer-content {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+}
+.footer-meta {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; color: var(--text-muted);
+}
+.changelog-btn {
+    padding: 3px 10px; border: 1px solid var(--border-glass);
+    border-radius: 4px; background: transparent;
+    color: var(--accent-blue); font-size: 11px; cursor: pointer;
+    font-family: var(--font); transition: var(--transition);
+}
+.changelog-btn:hover { background: rgba(41,151,255,0.1); }
+.changelog-panel {
+    border-top: 1px solid var(--border-glass);
+    margin-top: 12px; padding-top: 12px;
+}
+
 /* Responsive updates */
 @media (max-width: 768px) {
     .header-content { padding: 12px 16px; }

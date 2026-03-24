@@ -302,7 +302,7 @@ function setupTabs() {
             // Hide hero + M-series filters for non-M-series tabs
             const hero = document.querySelector(".hero");
             const filters = document.querySelector(".filters-section");
-            const hideHeroTabs = ["aseries","efficiency","timeline","upgrade","crossplatform","aiperformance"];
+            const hideHeroTabs = ["aseries","efficiency","timeline","upgrade","crossplatform","aiperformance","diemap","simulator"];
             if (hideHeroTabs.includes(btn.dataset.tab)) {
                 if (hero) hero.style.display = "none";
                 if (filters) filters.style.display = "none";
@@ -591,6 +591,8 @@ function setupLangToggle() {
         if (typeof renderUpgrade === "function") renderUpgrade();
         if (typeof renderCrossPlatform === "function") renderCrossPlatform();
         if (typeof renderAIPerformance === "function") renderAIPerformance();
+        if (typeof renderDieMap === "function") renderDieMap();
+        if (typeof renderSimulator === "function") renderSimulator();
     });
 }
 

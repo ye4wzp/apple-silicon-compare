@@ -45,6 +45,7 @@
                     <button class="search-toggle" id="searchToggle" aria-label="Search">🔍</button>
                     <input type="text" id="chipSearch" class="search-input" placeholder="Search chip..." data-en-placeholder="Search chip..." data-cn-placeholder="搜索芯片..." autocomplete="off">
                 </div>
+                <button id="shareCard" class="theme-btn" aria-label="Share" title="Generate share card">📤</button>
                 <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">☀️</button>
                 <button id="langToggle" class="lang-btn" aria-label="Toggle language">
                     <span class="lang-label">中文</span>
@@ -72,6 +73,8 @@
             <button class="tab-btn" data-tab="upgrade" data-en="🔄 Upgrade" data-cn="🔄 升级计算">🔄 Upgrade</button>
             <button class="tab-btn" data-tab="crossplatform" data-en="🌍 vs Intel/AMD" data-cn="🌍 跨平台">🌍 vs Intel/AMD</button>
             <button class="tab-btn" data-tab="aiperformance" data-en="🤖 AI Perf" data-cn="🤖 AI推理">🤖 AI Perf</button>
+            <button class="tab-btn" data-tab="diemap" data-en="🔬 Die Map" data-cn="🔬 架构图">🔬 Die Map</button>
+            <button class="tab-btn" data-tab="simulator" data-en="🎯 Simulator" data-cn="🎯 模拟器">🎯 Simulator</button>
         </div>
         <button class="tab-scroll-arrow tab-scroll-right" id="tabScrollRight" aria-label="Scroll tabs right">›</button>
         <div class="tab-fade-left"></div>
@@ -303,26 +306,49 @@
             <div id="aiContent"></div>
         </section>
 
+        <!-- Tab: Die Map -->
+        <section class="adv-section tab-content" id="tab-diemap">
+            <div class="adv-intro"><h3 data-en="🔬 Chip Architecture" data-cn="🔬 芯片架构图">🔬 Chip Architecture</h3>
+            <p data-en="Interactive block diagram — click modules to see details" data-cn="交互式架构框图 — 点击模块查看详情">Interactive block diagram — click modules to see details</p></div>
+            <div class="diemap-selector">
+                <label data-en="Select Chip" data-cn="选择芯片">Select Chip</label>
+                <select id="dieMapChip" class="tier-select"></select>
+            </div>
+            <div id="dieMapContent"></div>
+        </section>
+
+        <!-- Tab: Simulator -->
+        <section class="adv-section tab-content" id="tab-simulator">
+            <div class="adv-intro"><h3 data-en="🎯 Performance Simulator" data-cn="🎯 性能模拟器">🎯 Performance Simulator</h3>
+            <p data-en="Estimate task completion time on each chip" data-cn="估算各芯片完成任务的时间">Estimate task completion time on each chip</p></div>
+            <div id="simulatorContent"></div>
+        </section>
+
         <!-- Data Sources -->
         <section class="info-section">
             <div class="info-card">
-                <h5 data-en="📌 Data Sources" data-cn="📌 数据来源">📌 Data Sources</h5>
-                <p data-en="Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench Browser (GB6 averages), Cinebench R23. GPU benchmarks: Geekbench Metal, Apple/NotebookCheck TFLOPS data. Only officially released chips are included — M4 Ultra & M5 Ultra excluded."
-                   data-cn="硬件规格：Apple 官方页面、Wikipedia。CPU 基准：Geekbench Browser（GB6 均值）、Cinebench R23。GPU 基准：Geekbench Metal、Apple/NotebookCheck TFLOPS 数据。仅包含已正式发布的芯片 — M4 Ultra 和 M5 Ultra 未列入。">
-                    Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench Browser (GB6 averages), Cinebench R23. GPU benchmarks: Geekbench Metal, Apple/NotebookCheck TFLOPS data. Only officially released chips are included — M4 Ultra & M5 Ultra excluded.
-                </p>
+                <h5 data-en="📌 Data Sources &amp; Methodology" data-cn="📌 数据来源与方法论">📌 Data Sources &amp; Methodology</h5>
+                <p data-en="Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench 6 Browser (averages). GPU benchmarks: Geekbench Metal, TFLOPS data from Apple/NotebookCheck. Die data: Apple WWDC presentations, TechInsights teardowns, AnandTech analysis. AI inference: llama.cpp community benchmarks (Q4_K_M). Only officially released chips included." data-cn="硬件规格：Apple 官方、Wikipedia。CPU 基准：Geekbench 6 Browser 均值。GPU 基准：Geekbench Metal、Apple/NotebookCheck TFLOPS。芯片结构：Apple WWDC 演讲、TechInsights 拆解、AnandTech 分析。AI 推理：llama.cpp 社区基准（Q4_K_M 量化）。仅包含已发布芯片。">Hardware specs: Apple official pages, Wikipedia. CPU benchmarks: Geekbench 6 Browser (averages). GPU benchmarks: Geekbench Metal, TFLOPS data from Apple/NotebookCheck. Die data: Apple WWDC presentations, TechInsights teardowns, AnandTech analysis. AI inference: llama.cpp community benchmarks (Q4_K_M). Only officially released chips included.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <p data-en="Apple Silicon Performance Comparison • Data updated March 2026" data-cn="Apple Silicon 性能对比 • 数据更新至 2026年3月">Apple Silicon Performance Comparison • Data updated March 2026</p>
+        <div class="footer-content">
+            <p data-en="Apple Silicon Performance Comparison" data-cn="Apple Silicon 性能对比">Apple Silicon Performance Comparison</p>
+            <div class="footer-meta">
+                <span id="dataVersion">v2.1 • 2026-03-24</span>
+                <button id="changelogBtn" class="changelog-btn" data-en="Changelog" data-cn="更新记录">Changelog</button>
+            </div>
+        </div>
+        <div id="changelogPanel" class="changelog-panel" style="display:none"></div>
     </footer>
 
     <script src="app.js"></script>
     <script src="app-extra.js"></script>
     <script src="app-ui.js"></script>
     <script src="app-advanced.js"></script>
+    <script src="app-features.js"></script>
     <script>
     // Service Worker Registration
     if ('serviceWorker' in navigator) {
