@@ -1,11 +1,17 @@
-const CACHE_NAME = 'silicon-compare-v1';
+const CACHE_NAME = 'silicon-compare-v2';
 const ASSETS = [
   './',
   './index.html',
   './style.css',
   './app.js',
+  './app-ui.js',
   './app-extra.js',
-  './prices.json'
+  './app-advanced.js',
+  './app-features.js',
+  './app-compare.js',
+  './prices.json',
+  './manifest.json',
+  './og-image.png'
 ];
 
 self.addEventListener('install', e => {

@@ -297,7 +297,8 @@ function setupTabs() {
             document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
             document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
             btn.classList.add("active");
-            document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
+            const tabEl = document.getElementById(`tab-${btn.dataset.tab}`);
+            if (tabEl) tabEl.classList.add("active");
 
             // Hide hero + M-series filters for non-M-series tabs
             const hero = document.querySelector(".hero");

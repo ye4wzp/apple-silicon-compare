@@ -178,6 +178,20 @@ function generateShareCard() {
     const ctx = canvas.getContext("2d");
     ctx.scale(dpr, dpr);
 
+    // Polyfill roundRect for Safari < 16
+    if (!ctx.roundRect) {
+        ctx.roundRect = function(x, y, w, h, r) {
+            if (typeof r === "number") r = [r, r, r, r];
+            this.beginPath();
+            this.moveTo(x + r[0], y);
+            this.arcTo(x + w, y, x + w, y + h, r[1]);
+            this.arcTo(x + w, y + h, x, y + h, r[2]);
+            this.arcTo(x, y + h, x, y, r[3]);
+            this.arcTo(x, y, x + w, y, r[0]);
+            this.closePath();
+        };
+    }
+
     const en = typeof currentLang === "undefined" || currentLang === "en";
 
     // Background gradient

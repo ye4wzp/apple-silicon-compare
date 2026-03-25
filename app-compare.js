@@ -317,6 +317,20 @@ function generateOGImage() {
     canvas.height = 630;
     const ctx = canvas.getContext("2d");
 
+    // Polyfill roundRect for Safari < 16
+    if (!ctx.roundRect) {
+        ctx.roundRect = function(x, y, w, h, r) {
+            if (typeof r === "number") r = [r, r, r, r];
+            this.beginPath();
+            this.moveTo(x + r[0], y);
+            this.arcTo(x + w, y, x + w, y + h, r[1]);
+            this.arcTo(x + w, y + h, x, y + h, r[2]);
+            this.arcTo(x, y + h, x, y, r[3]);
+            this.arcTo(x, y, x + w, y, r[0]);
+            this.closePath();
+        };
+    }
+
     // Dark gradient background
     const grad = ctx.createLinearGradient(0, 0, 1200, 630);
     grad.addColorStop(0, "#0a0a1a");

@@ -32,6 +32,7 @@ const aiInferenceData = [
     { chip: "M3",          llama7b: 14.8,  llama13b: 8.1,  llama70b: null, sdGen: 19,  whisper: 2.0 },
     { chip: "M3 Pro",      llama7b: 20.5,  llama13b: 12.4, llama70b: null, sdGen: 12,  whisper: 2.8 },
     { chip: "M3 Max",      llama7b: 32.0,  llama13b: 18.5, llama70b: 5.2,  sdGen: 6.5, whisper: 4.0 },
+    { chip: "M3 Ultra",    llama7b: 55.0,  llama13b: 32.0, llama70b: 10.5, sdGen: 3.5, whisper: 7.0 },
     { chip: "M4",          llama7b: 18.2,  llama13b: 10.5, llama70b: null, sdGen: 15,  whisper: 2.6 },
     { chip: "M4 Pro",      llama7b: 26.8,  llama13b: 15.2, llama70b: 2.8,  sdGen: 9,   whisper: 3.5 },
     { chip: "M4 Max",      llama7b: 42.5,  llama13b: 25.0, llama70b: 7.8,  sdGen: 4,   whisper: 5.5 },
@@ -295,7 +296,7 @@ function renderCrossPlatform() {
     // Combine Apple + competitors
     const appleChips = chipData.filter(c => c.tier === "Base" || c.tier === "Pro").map(c => ({
         name: c.name, brand: "Apple", gb6S: c.gb6Single, gb6M: c.gb6Multi,
-        tdp: extendedData[c.name]?.tdp || 0, year: c.year, type: "Laptop"
+        tdp: extendedData[c.name]?.tdpTotal || 0, year: c.year, type: "Laptop"
     }));
     const all = [...appleChips, ...crossPlatformChips].sort((a, b) => b.gb6M - a.gb6M);
     const maxM = all[0].gb6M;
