@@ -27,7 +27,7 @@ const chipData = [
         gpuCores: 16, gpuTFLOPS: 5.3,
         neuralTOPS: 11, memBandwidth: 200, maxMemory: 32,
         processNm: 5, transistorsB: 33.7,
-        gb6Single: 2384, gb6Multi: 12318, gb6Metal: 65436,
+        gb6Single: 2386, gb6Multi: 12348, gb6Metal: 65436,
         cb23Single: 1530, cb23Multi: 12390,
         devices_en: "MacBook Pro 14\"/16\"",
         devices_cn: "MacBook Pro 14\"/16\""
@@ -38,7 +38,7 @@ const chipData = [
         gpuCores: 32, gpuTFLOPS: 10.4,
         neuralTOPS: 11, memBandwidth: 400, maxMemory: 64,
         processNm: 5, transistorsB: 57,
-        gb6Single: 2382, gb6Multi: 12404, gb6Metal: 68870,
+        gb6Single: 2397, gb6Multi: 12459, gb6Metal: 68870,
         cb23Single: 1540, cb23Multi: 12450,
         devices_en: "MacBook Pro 14\"/16\", Mac Studio",
         devices_cn: "MacBook Pro 14\"/16\", Mac Studio"
@@ -49,7 +49,7 @@ const chipData = [
         gpuCores: 64, gpuTFLOPS: 21.0,
         neuralTOPS: 22, memBandwidth: 800, maxMemory: 128,
         processNm: 5, transistorsB: 114,
-        gb6Single: 2374, gb6Multi: 18238, gb6Metal: 102156,
+        gb6Single: 2398, gb6Multi: 18439, gb6Metal: 102156,
         cb23Single: 1536, cb23Multi: 24024,
         devices_en: "Mac Studio, Mac Pro",
         devices_cn: "Mac Studio, Mac Pro"
@@ -62,7 +62,7 @@ const chipData = [
         gpuCores: 10, gpuTFLOPS: 3.6,
         neuralTOPS: 15.8, memBandwidth: 100, maxMemory: 24,
         processNm: 5, transistorsB: 20,
-        gb6Single: 2565, gb6Multi: 9637, gb6Metal: 40066,
+        gb6Single: 2565, gb6Multi: 9666, gb6Metal: 40066,
         cb23Single: 1592, cb23Multi: 8558,
         devices_en: "MacBook Air, MacBook Pro 13\", Mac mini, iPad Pro",
         devices_cn: "MacBook Air, MacBook Pro 13\", Mac mini, iPad Pro"
@@ -73,7 +73,7 @@ const chipData = [
         gpuCores: 19, gpuTFLOPS: 6.8,
         neuralTOPS: 15.8, memBandwidth: 200, maxMemory: 32,
         processNm: 5, transistorsB: 40,
-        gb6Single: 2654, gb6Multi: 14521, gb6Metal: 52691,
+        gb6Single: 2660, gb6Multi: 14395, gb6Metal: 52691,
         cb23Single: 1672, cb23Multi: 14420,
         devices_en: "MacBook Pro 14\"/16\", Mac mini, Mac Studio",
         devices_cn: "MacBook Pro 14\"/16\", Mac mini, Mac Studio"
@@ -84,7 +84,7 @@ const chipData = [
         gpuCores: 38, gpuTFLOPS: 13.6,
         neuralTOPS: 15.8, memBandwidth: 400, maxMemory: 96,
         processNm: 5, transistorsB: 67,
-        gb6Single: 2748, gb6Multi: 14835, gb6Metal: 86805,
+        gb6Single: 2716, gb6Multi: 14776, gb6Metal: 86805,
         cb23Single: 1695, cb23Multi: 14780,
         devices_en: "MacBook Pro 14\"/16\", Mac Studio",
         devices_cn: "MacBook Pro 14\"/16\", Mac Studio"
@@ -95,7 +95,7 @@ const chipData = [
         gpuCores: 76, gpuTFLOPS: 27.2,
         neuralTOPS: 31.6, memBandwidth: 800, maxMemory: 192,
         processNm: 5, transistorsB: 134,
-        gb6Single: 2768, gb6Multi: 21100, gb6Metal: 222582,
+        gb6Single: 2805, gb6Multi: 21497, gb6Metal: 222582,
         cb23Single: 1700, cb23Multi: 28790,
         devices_en: "Mac Studio, Mac Pro",
         devices_cn: "Mac Studio, Mac Pro"
@@ -108,7 +108,7 @@ const chipData = [
         gpuCores: 10, gpuTFLOPS: 4.1,
         neuralTOPS: 18, memBandwidth: 100, maxMemory: 24,
         processNm: 3, transistorsB: 25,
-        gb6Single: 3125, gb6Multi: 12081, gb6Metal: 45597,
+        gb6Single: 3068, gb6Multi: 11800, gb6Metal: 45597,
         cb23Single: 1893, cb23Multi: 9557,
         devices_en: "MacBook Air, MacBook Pro 14\", iMac",
         devices_cn: "MacBook Air, MacBook Pro 14\", iMac"
@@ -119,7 +119,7 @@ const chipData = [
         gpuCores: 18, gpuTFLOPS: 7.4,
         neuralTOPS: 18, memBandwidth: 150, maxMemory: 36,
         processNm: 3, transistorsB: 37,
-        gb6Single: 3053, gb6Multi: 14531, gb6Metal: 78681,
+        gb6Single: 3053, gb6Multi: 15173, gb6Metal: 78681,
         cb23Single: 1880, cb23Multi: 14350,
         devices_en: "MacBook Pro 14\"/16\"",
         devices_cn: "MacBook Pro 14\"/16\""
@@ -130,7 +130,7 @@ const chipData = [
         gpuCores: 40, gpuTFLOPS: 16.4,
         neuralTOPS: 18, memBandwidth: 400, maxMemory: 128,
         processNm: 3, transistorsB: 92,
-        gb6Single: 3099, gb6Multi: 21045, gb6Metal: 154860,
+        gb6Single: 3099, gb6Multi: 19600, gb6Metal: 154860,
         cb23Single: 1885, cb23Multi: 21100,
         devices_en: "MacBook Pro 14\"/16\"",
         devices_cn: "MacBook Pro 14\"/16\""
@@ -141,7 +141,7 @@ const chipData = [
         gpuCores: 80, gpuTFLOPS: 32.8,
         neuralTOPS: 36, memBandwidth: 819, maxMemory: 256,
         processNm: 3, transistorsB: 184,
-        gb6Single: 3098, gb6Multi: 27726, gb6Metal: 259668,
+        gb6Single: 3202, gb6Multi: 27736, gb6Metal: 259668,
         cb23Single: 1890, cb23Multi: 39200,
         devices_en: "Mac Studio, Mac Pro",
         devices_cn: "Mac Studio, Mac Pro"
@@ -154,7 +154,7 @@ const chipData = [
         gpuCores: 10, gpuTFLOPS: 4.6,
         neuralTOPS: 38, memBandwidth: 120, maxMemory: 32,
         processNm: 3, transistorsB: 28,
-        gb6Single: 3765, gb6Multi: 14889, gb6Metal: 54846,
+        gb6Single: 3781, gb6Multi: 14858, gb6Metal: 54846,
         cb23Single: 2162, cb23Multi: 12070,
         devices_en: "MacBook Pro 14\", iMac, Mac mini, iPad Pro",
         devices_cn: "MacBook Pro 14\", iMac, Mac mini, iPad Pro"
@@ -165,7 +165,7 @@ const chipData = [
         gpuCores: 20, gpuTFLOPS: 9.2,
         neuralTOPS: 38, memBandwidth: 273, maxMemory: 64,
         processNm: 3, transistorsB: null,
-        gb6Single: 3802, gb6Multi: 22400, gb6Metal: 110556,
+        gb6Single: 3851, gb6Multi: 22400, gb6Metal: 110556,
         cb23Single: 2382, cb23Multi: 18904,
         devices_en: "MacBook Pro 14\"/16\", Mac mini",
         devices_cn: "MacBook Pro 14\"/16\", Mac mini"
@@ -185,18 +185,18 @@ const chipData = [
     // === M5 Family ===
     {
         name: "M5", gen: "M5", tier: "Base", year: 2025,
-        cpuCores: 10, cpuP: 4, cpuE: 6, cpuConfig: "4P + 6E",
+        cpuCores: 10, cpuP: 4, cpuE: 6, cpuConfig: "4S + 6E",
         gpuCores: 10, gpuTFLOPS: 6.6,
         neuralTOPS: null, memBandwidth: 153, maxMemory: 32,
         processNm: 3, transistorsB: null,
-        gb6Single: 4228, gb6Multi: 17460, gb6Metal: 76278,
+        gb6Single: 4226, gb6Multi: 17862, gb6Metal: 76278,
         cb23Single: 2459, cb23Multi: 15893,
         devices_en: "MacBook Pro 14\", MacBook Air, iPad Pro, Vision Pro",
         devices_cn: "MacBook Pro 14\", MacBook Air, iPad Pro, Vision Pro"
     },
     {
         name: "M5 Pro", gen: "M5", tier: "Pro", year: 2026,
-        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6P + 12E",
+        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6S + 12P",
         gpuCores: 20, gpuTFLOPS: null,
         neuralTOPS: null, memBandwidth: 307, maxMemory: 64,
         processNm: 3, transistorsB: null,
@@ -207,7 +207,7 @@ const chipData = [
     },
     {
         name: "M5 Max", gen: "M5", tier: "Max", year: 2026,
-        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6P + 12E",
+        cpuCores: 18, cpuP: 6, cpuE: 12, cpuConfig: "6S + 12P",
         gpuCores: 40, gpuTFLOPS: null,
         neuralTOPS: null, memBandwidth: 614, maxMemory: 128,
         processNm: 3, transistorsB: null,

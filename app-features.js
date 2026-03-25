@@ -70,16 +70,16 @@ const dieMapData = {
         ]
     },
     "M5": {
-        transistors: "25B (est.)", dieSizeMm2: 108, processNm: 2, node: "TSMC N2 (first 2nm)",
-        source: "Apple March 2025 event, Apple.com",
+        transistors: "25B (est.)", dieSizeMm2: 108, processNm: 3, node: "TSMC N3P (3rd gen 3nm)",
+        source: "Apple Oct 2025 & Mar 2026 Events, Apple.com",
         blocks: [
-            { id:"cpu-p", label:"P-Core ×5", labelCn:"性能核 ×5", x:5, y:5, w:38, h:28, color:"#2997ff", desc:"5 performance cores (new configuration), wider pipeline", descCn:"5 个性能核（新配置）, 更宽流水线" },
-            { id:"cpu-e", label:"E-Core ×5", labelCn:"能效核 ×5", x:45, y:5, w:28, h:16, color:"#30d158", desc:"5 efficiency cores, improved perf/watt", descCn:"5 个能效核, 每瓦性能提升" },
-            { id:"gpu", label:"GPU 10-Core", labelCn:"GPU 10核", x:5, y:38, w:50, h:28, color:"#ff9f0a", desc:"Next-gen GPU architecture on 2nm, enhanced ray tracing", descCn:"2nm 下一代 GPU 架构, 增强光线追踪" },
+            { id:"cpu-p", label:"S-Core ×4", labelCn:"超级核 ×4", x:5, y:5, w:38, h:28, color:"#2997ff", desc:"4 Super cores @ 4.61 GHz, widened pipeline, renamed from P-cores", descCn:"4 个超级核 @ 4.61 GHz, 加宽流水线, 从性能核更名" },
+            { id:"cpu-e", label:"E-Core ×6", labelCn:"能效核 ×6", x:45, y:5, w:28, h:16, color:"#30d158", desc:"6 efficiency cores, TSMC N3P 3nm", descCn:"6 个能效核, TSMC N3P 3nm 制程" },
+            { id:"gpu", label:"GPU 10-Core", labelCn:"GPU 10核", x:5, y:38, w:50, h:28, color:"#ff9f0a", desc:"New GPU with dedicated AI hardware, enhanced ray tracing", descCn:"全新 GPU, 专用 AI 硬件, 增强光线追踪" },
             { id:"ne", label:"Neural Engine", labelCn:"神经引擎", x:58, y:38, w:37, h:14, color:"#bf5af2", desc:"16-core, 38 TOPS, optimized for Apple Intelligence on-device", descCn:"16 核, 38 TOPS, 针对 Apple Intelligence 本地推理优化" },
             { id:"mem", label:"Memory Controller", labelCn:"内存控制器", x:5, y:72, w:90, h:10, color:"#64d2ff", desc:"128-bit LPDDR5X, 120 GB/s, 16/24/32GB unified", descCn:"128-bit LPDDR5X, 120 GB/s, 16/24/32GB 统一内存" },
             { id:"media", label:"Media Engine", labelCn:"媒体引擎", x:58, y:5, w:17, h:16, color:"#ff375f", desc:"AV1 + ProRes + H.266 encode/decode", descCn:"AV1 + ProRes + H.266 编解码" },
-            { id:"io", label:"I/O & Fabric", labelCn:"I/O 总线", x:58, y:56, w:37, h:10, color:"#ffd60a", desc:"Thunderbolt 5, PCIe 5.0, Wi-Fi 7, USB4", descCn:"Thunderbolt 5, PCIe 5.0, Wi-Fi 7, USB4" },
+            { id:"io", label:"I/O & Fabric", labelCn:"I/O 总线", x:58, y:56, w:37, h:10, color:"#ffd60a", desc:"Thunderbolt 5, PCIe 4.0, Wi-Fi 6E, USB4", descCn:"Thunderbolt 5, PCIe 4.0, Wi-Fi 6E, USB4" },
             { id:"isp", label:"ISP + DPU", labelCn:"ISP + 显示", x:77, y:5, w:18, h:16, color:"#86868b", desc:"Display engine: ProMotion, external 6K, HDR10+", descCn:"显示引擎: ProMotion, 外接 6K, HDR10+" }
         ]
     }
